@@ -1,0 +1,95 @@
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     struct ListNode *next;
+ * };
+ */
+struct ListNode* addTwoNumbers(struct ListNode* l1, struct ListNode* l2){
+    struct ListNode * head1 = l1,*head2 = l2;
+    while(head1 != NULL && head2 != NULL){       
+        head2 = head2->next;
+        head1 = head1->next;
+    }
+    if(head1==NULL){
+        head1 = l1,head2=l2;
+        while(head1!=NULL){
+            head2->val += head1->val;
+            if(head2->val>=10){
+                head2->val = head2->val%10;
+                if(head2->next==NULL){
+                struct ListNode * new = (struct ListNode *)malloc(sizeof(struct ListNode));
+                head2->next = new;
+                new->val = 1;
+                new->next =NULL;
+                return l2;
+                }
+                head2->next->val+=1;
+                struct ListNode * temp = head2;
+                while(temp->val>=10){
+                    temp->val = temp->val%10;
+                    
+                    temp->next->val+=1;
+                    temp = temp->next;
+                }
+            }
+            head1 = head1->next;
+            head2 = head2->next;
+        }
+            struct ListNode * temp = head2;
+            if (head2==NULL) return l2;
+            while(temp->val>=10){
+                temp->val = temp->val%10;
+                if(temp->next==NULL){
+                    struct ListNode * new = (struct ListNode *)malloc(sizeof(struct ListNode));
+                    temp->next = new;
+                    new->val = 1;
+                    new->next =NULL;
+                    return l2;
+                }
+                temp->next->val+=1;
+                temp = temp->next;
+            }
+        return l2;
+    }
+    else{
+        head1 = l1,head2=l2;
+        while(head2!=NULL){
+            head1->val += head2->val;
+            if(head1->val>=10){
+                head1->val = head1->val%10;
+                if(head1->next==NULL){
+                struct ListNode * new = (struct ListNode *)malloc(sizeof(struct ListNode));
+                head1->next = new;
+                new->val = 1;
+                new->next =NULL;
+                return l1;
+                }
+                head1->next->val+=1;
+                struct ListNode * temp = head1;
+                while(temp->val>=10){
+                    temp->val = temp->val%10;
+                    temp->next->val+=1;
+                    temp = temp->next;
+                }
+            }
+            head1 = head1->next;
+            head2 = head2->next;
+        }
+        if (head1==NULL) return l1;
+        struct ListNode * temp = head1;
+        while(temp->val>=10){
+            temp->val = temp->val%10;
+            if(temp->next==NULL){
+                struct ListNode * new = (struct ListNode *)malloc(sizeof(struct ListNode));
+                temp->next = new;
+                new->val = 1;
+                new->next =NULL;
+                return l1;
+                }
+            temp->next->val+=1;
+            temp = temp->next;
+            }
+        return l1;
+    }
+} 
