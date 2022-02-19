@@ -1,0 +1,31 @@
+class Solution:
+    def pancakeSort(self, arr: List[int]) -> List[int]:
+        def exchange(data,start,end):
+            while start < end:
+                temp = data[start]
+                data[start] = data[end]
+                data[end] = temp
+                start = start + 1
+                end = end - 1
+            #return data
+        def is_sorted(data):
+            for i in range(len(data)-1):
+                if data[i] > data[i+1]:
+                    return False
+            return True
+        res = []
+        from copy import deepcopy
+        brr = deepcopy(arr)
+        if is_sorted(brr):
+            return res
+        while len(brr) != 1:
+            max_pos = brr.index(max(brr))
+            res.append(max_pos+1)
+            exchange(brr,0,max_pos)
+            res.append(len(brr))
+            exchange(brr,0,len(brr)-1)
+            brr.pop()
+            if is_sorted(brr):
+                return res
+            print(brr)
+        return res
