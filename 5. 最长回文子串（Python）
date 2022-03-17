@@ -1,0 +1,36 @@
+#时间太长了，超时没通过
+class Solution(object):
+    def longestPalindrome(self, s):
+        """
+        :type s: str
+        :rtype: str
+        """
+        length = len(s)
+        if length == 0:
+            return ""
+        src = s
+        rev = ""
+        for u in src[::-1]:
+            rev += u
+        if src == rev:
+            return s
+        if length == 2:
+            if src == rev:
+                return s
+            else:
+                return s[0]          
+        def is_huiwen(ss,i,j):
+            #print(ss[i:j])
+            if i == j or j < i:
+                return True
+            if ss[i] == ss[j]:
+                return is_huiwen(ss,i+1,j-1)
+            else:
+                return False
+        for i in range(2,length):
+            le = length - i + 1 
+            for j in range(i):
+                if is_huiwen(s,j,j+le-1):
+                    return s[j:j+le]
+        return rev[-1]
+        
