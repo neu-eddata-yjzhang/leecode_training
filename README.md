@@ -1,6 +1,4 @@
 # leecode_training
-
-
 1.两数之和(Python)
 
     1.1 捕捉list.index()方法的异常
